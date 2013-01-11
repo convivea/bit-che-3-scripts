@@ -1,0 +1,44 @@
+[script]
+name=Cinemageddon.net
+source=Cinemageddon
+author=CuF
+modified=2013/01/10 by CuF
+version=2
+pwd=1
+
+[home]
+1=http://cinemageddon.net
+
+[profiles]
+all=/browse.php?search=%SEARCH%&proj=0
+
+[login]
+login=http://cinemageddon.net/takelogin.php
+form=username=%USER%&password=%PASS%
+failed=Login failed!
+failed2=Username or password incorrect
+
+[code1]
+x=findh(x,@data,`Upped&nbsp;by`,`<tr class`)
+z=findh(x,@data,`</table>`)
+@data=crop(@data,x,z)
+@data=vacuum(@data)
+@r=split(@data,`</tr>`)
+
+start
+@q=split(@r,`</td>`)
+t=array(@q,1)
+@i=find(@i,t,`href`)
+$page=extract(@i,t,`"`,`"`,`http://cinemageddon.net/`)
+$name=extract(@i,t,`>`,`</b`)
+@i=find(@i,t,`title=imdb`,`<a`)
+$torrent=extract(@i,t,`=`,`>`,`http://cinemageddon.net/`)
+t=array(@q,2)
+i=find(@i,t,`nobr`)
+$date=extract(@i,t,`>`,`<`)
+t=array(@q,3)
+$size=extract(@i,t,`>`,`<`)
+$seeds=array(@q,5)
+$leeches=array(@q,6)
+aloop
+[/code1]
