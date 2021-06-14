@@ -1,0 +1,66 @@
+[script]
+name=pornolab.net(Adult)
+home=http://pornolab.net
+pwd=1
+author=CuF
+login=http://pornolab.net/forum/login.php
+referer=http://pornolab.net/forum/login.php
+prelogin=http://pornolab.net/forum/login.php
+form=login_username=%USER%&login_password=%PASS%
+special=1
+failed=<form action="./login.php" method="post">
+failed2=/login.php?redirect=/forum/tracker.php
+main=POSThttp://pornolab.net/forum/tracker.php?max=1&to=1&nm=%SEARCH%
+
+[special]
+page=http://pornolab.net/forum/login.php
+post=http://pornolab.net/forum/login.php
+img_src=security.php?id=
+id_name=pictureid
+check_name=checkword
+
+[code]
+x=h(x,d,<table class="forumline">,</thead>)
+z=i(x,d,<tfoot>)
+d=c(d,x,z)
+d=replace(d,</td>,</td>[-BC-])
+r=split(d,</tbody>)
+start
+q=split(r,[-BC-],2)
+t=array(q,3)
+x=p(1)
+x=i(x,t,href=)
+j=e(t,x,",")
+j=replace(j,./,http://pornolab.net/forum/)
+3=save(j)
+x=p(1)
+x=i(x,t,<b)
+k=e(t,x,>,</b>)
+k=replace(k,<wbr>,)
+1=save(k)
+t=array(q,5)
+x=p(1)
+x=i(x,t,href=)
+j=e(t,x,",")
+j=replace(j,./,http://pornolab.net/forum/)
+7=save(j)
+t=array(q,6)
+z=p(1)
+2=x(t,z,>,</td>)
+t=array(q,7)
+z=p(1)
+5=x(t,z,>,</td>)
+t=array(q,8)
+z=p(1)
+6=x(t,z,>,</td>)
+aloop
+[/code]
+
+
+1 = name
+2 = size
+3 = page
+4 = [not used]
+5 = seeds
+6 = leeches
+7 = url
